@@ -66,8 +66,10 @@ export function AboutUsCarousel({ slides }: AboutUsCarouselProps) {
             )
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-[-40px]" />
-        <CarouselNext className="right-[-40px]" />
+        <div className="hidden lg:block">
+          <CarouselPrevious className="left-[-40px]" />
+          <CarouselNext className="right-[-40px]" />
+        </div>
       </Carousel>
     </div>
   )

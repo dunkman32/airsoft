@@ -50,20 +50,19 @@ export function NewsCarouselComponent({ newsItems }: { newsItems?: News[] }) {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2 line-clamp-2">
-                    {item.title}
-                  </h3>
+                  <h3 className="text-lg font-semibold mb-2 line-clamp-2">{item.title}</h3>
                   {item.desc && (
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {item.desc}
-                    </p>
+                    <p className="text-sm text-muted-foreground line-clamp-3">{item.desc}</p>
                   )}
                 </div>
               </div>
             )
 
             return (
-              <CarouselItem key={item.id || index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+              <CarouselItem
+                key={item.id || index}
+                className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
+              >
                 <Link href={`/news/${item.slug}`} className="block w-full">
                   {newsCard}
                 </Link>
@@ -71,8 +70,10 @@ export function NewsCarouselComponent({ newsItems }: { newsItems?: News[] }) {
             )
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-[-40px]" />
-        <CarouselNext className="right-[-40px]" />
+        <div className="hidden lg:block">
+          <CarouselPrevious className="left-[-40px]" />
+          <CarouselNext className="right-[-40px]" />
+        </div>
       </Carousel>
     </div>
   )
