@@ -35,7 +35,7 @@ export function AdsCarouselComponent({ adsItems }: { adsItems?: HomeSetting['ads
             if (!imageUrl) return null
 
             const adItem = (
-              <div className="relative w-full min-h-[42px] overflow-hidden rounded-lg">
+              <div className="relative w-full min-h-[42px] overflow-hidden">
                 <Image
                   src={imageUrl}
                   alt={item.title || image.alt || `Ad ${index + 1}`}
@@ -44,8 +44,8 @@ export function AdsCarouselComponent({ adsItems }: { adsItems?: HomeSetting['ads
                   sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 />
                 {item.title && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-                    <p className="text-white text-sm font-medium truncate">
+                  <div className="absolute inset-0 bg-gradient-to-t flex items-center from-black/70 to-transparent backdrop-blur-sm p-2">
+                    <p className="text-white text-lg font-medium truncate drop-shadow-lg">
                       {item.title}
                     </p>
                   </div>
@@ -54,7 +54,7 @@ export function AdsCarouselComponent({ adsItems }: { adsItems?: HomeSetting['ads
             )
 
             return (
-              <CarouselItem key={item.id || index} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <CarouselItem key={item.id || index} className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/4">
                 {item.link ? (
                   <Link href={item.link} className="block w-full">
                     {adItem}

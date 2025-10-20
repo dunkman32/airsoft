@@ -16,7 +16,7 @@ export async function AdsCarousel() {
     return null
   }
 
-  return <div className='bg-brand-orange p-2'>
+  return <div className='py-1'>
     <AdsCarouselComponent adsItems={adsItems} />
   </div>
 }

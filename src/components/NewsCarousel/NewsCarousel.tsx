@@ -20,8 +20,13 @@ export function NewsCarouselComponent({ newsItems }: { newsItems?: News[] }) {
   }
 
   return (
-    <div className="container mx-auto">
-      <h2 className="text-2xl font-bold mb-6">Latest News</h2>
+    <div className="container mx-auto p-3 lg:p-8 rounded-lg">
+      <h2
+        className="text-2xl uppercase font-bold mb-6 text-brand-orange"
+        style={{ textShadow: '0 2px 4px rgba(225, 138, 62, 0.4)' }}
+      >
+        Latest News
+      </h2>
       <Carousel
         opts={{
           align: 'start',

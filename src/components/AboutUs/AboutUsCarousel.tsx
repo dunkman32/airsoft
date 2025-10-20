@@ -66,10 +66,10 @@ export function AboutUsCarousel({ slides }: AboutUsCarouselProps) {
             )
           })}
         </CarouselContent>
-        <div className="hidden lg:block">
+        {/* <div className="hidden lg:block">
           <CarouselPrevious className="left-[-40px]" />
           <CarouselNext className="right-[-40px]" />
-        </div>
+        </div> */}
       </Carousel>
     </div>
   )

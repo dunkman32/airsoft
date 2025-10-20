@@ -11,16 +11,34 @@ import {
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import type { CarouselApi } from '@/components/ui/carousel'
 
 export function HomeCarouselComponent({ carouselItems }: { carouselItems?: HomeSetting['carousel'] }) {
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCurrent(api.selectedScrollSnap())
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
+
   return (
-    <div className="w-full min-h-[440px]">
+    <div className="w-full min-h-[440px] relative">
       <Carousel
+        setApi={setApi}
         opts={{
           align: 'start',
           loop: true,
         }}
-        plugins={[Autoplay()]}
+        plugins={[Autoplay({ delay: 5000 })]}
         className="w-full"
       >
         <CarouselContent>
@@ -59,6 +77,20 @@ export function HomeCarouselComponent({ carouselItems }: { carouselItems?: HomeS
         <CarouselPrevious className="left-4" />
         <CarouselNext className="right-4" />
       </Carousel>
+
+      {/* Pagination bullets */}
+      <div className="absolute bottom-4 backdrop-blur p-1 rounded-3xl left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+        {carouselItems?.map((item, index) => (
+          <button
+            key={item.id || index}
+            className={`w-2 h-2 rounded-full transition-all ${
+              index === current ? 'bg-white w-8' : 'bg-white/50'
+            }`}
+            onClick={() => api?.scrollTo(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   )
 }
