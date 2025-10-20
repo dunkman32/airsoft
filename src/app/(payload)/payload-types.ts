@@ -174,7 +174,7 @@ export interface News {
   title: string;
   desc: string;
   /**
-   * URL-friendly version of the title
+   * URL-friendly version of the title (auto-generated if left empty)
    */
   slug: string;
   content: {

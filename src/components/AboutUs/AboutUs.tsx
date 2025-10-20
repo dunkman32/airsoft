@@ -13,19 +13,23 @@ export async function AboutUs() {
     <section className="w-full py-16">
       <div className="container mx-auto border-t border-b border-dashed py-8 lg:py-12 border-brand-orange">
         {/* Centered Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-charcoal text-center mb-6">
+        <h1
+          className="text-4xl md:text-5xl font-bold text-brand-charcoal text-center mb-6 uppercase"
+          style={{ textShadow: '2px 4px 8px rgba(225, 138, 62, 0.4)' }}
+        >
           {aboutUs.title}
         </h1>
 
         {/* Centered Description */}
-        <p className="text-lg text-brand-gray-600 text-center max-w-4xl mx-auto mb-12 leading-relaxed whitespace-pre-line">
+        <p
+          className="text-lg text-brand-gray-600 text-center max-w-4xl mx-auto mb-12 leading-relaxed whitespace-pre-line"
+          style={{ textShadow: '2px 4px 4px rgba(0, 0, 0, 0.4)' }}
+        >
           {aboutUs.desc}
         </p>
 
         {/* Carousel - 3 items full screen */}
-        {aboutUs.slides && aboutUs.slides.length > 0 && (
-          <AboutUsCarousel slides={aboutUs.slides} />
-        )}
+        {aboutUs.slides && aboutUs.slides.length > 0 && <AboutUsCarousel slides={aboutUs.slides} />}
       </div>
     </section>
   )
