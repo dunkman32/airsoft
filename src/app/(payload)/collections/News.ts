@@ -24,7 +24,7 @@ export const News: CollectionConfig = {
       async ({ data, req, operation }) => {
         // Auto-generate slug from title if slug is not provided
         if (data?.title && !data?.slug) {
-          let baseSlug = formatSlug(data.title)
+          const baseSlug = formatSlug(data.title)
           let slug = baseSlug
           let counter = 1
 
