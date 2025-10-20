@@ -16,6 +16,14 @@ import { AboutUs } from './globals/AboutUs'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+if (!process.env.PAYLOAD_SECRET) {
+  throw new Error('PAYLOAD_SECRET environment variable is required')
+}
+
+if (!process.env.DATABASE_URI) {
+  throw new Error('DATABASE_URI environment variable is required')
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -26,13 +34,13 @@ export default buildConfig({
   collections: [Users, Media, News],
   globals: [HomeSettings, AboutUs],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: process.env.PAYLOAD_SECRET,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: process.env.DATABASE_URI,
     },
   }),
   sharp,
