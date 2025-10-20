@@ -27,7 +27,7 @@ export function AdsCarouselComponent({ adsItems }: { adsItems?: HomeSetting['ads
         plugins={[Autoplay({ delay: 2000 })]}
         className="w-full"
       >
-        <CarouselContent className="-ml-2 md:-ml-4">
+        <CarouselContent className="-ml-1 md:-ml-2">
           {adsItems.map((item, index) => {
             const image = item.image as Media | undefined
             const imageUrl = image?.url
