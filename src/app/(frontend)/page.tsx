@@ -4,8 +4,11 @@ import { getPayload } from 'payload'
 import React from 'react'
 import { fileURLToPath } from 'url'
 
-import config from '@/payload.config'
-import './styles.css'
+import config from '@payload-config'
+import { HomeCarousel } from '@/components/HomeCarousel'
+import { AdsCarousel } from '@/components/AdsCarousel'
+import { NewsCarousel } from '@/components/NewsCarousel'
+import { AboutUs } from '@/components/AboutUs/index'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -17,6 +20,10 @@ export default async function HomePage() {
 
   return (
     <div className="home">
+      <AdsCarousel />
+      <HomeCarousel />
+      <AboutUs />
+      <NewsCarousel />
       <div className="content">
         <picture>
           <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
@@ -27,32 +34,6 @@ export default async function HomePage() {
             width={65}
           />
         </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
       </div>
     </div>
   )
