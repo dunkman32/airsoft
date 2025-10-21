@@ -10,6 +10,7 @@ export function NavLinks() {
     { href: '/news', label: 'News' },
     { href: '/events', label: 'Events' },
     { href: '/rules', label: 'Rules' },
+    { href: '/shop', label: 'Shop' },
   ]
 
   return (
