@@ -11,14 +11,16 @@ export async function AboutUs() {
 
   return (
     <section className="w-full py-16">
-      <div className="container mx-auto border-t border-b border-dashed py-8 lg:py-12 border-brand-orange">
+      <div className="container mx-auto">
         {/* Centered Title */}
-        <h1
+       <div>
+         <h1
           className="text-4xl md:text-5xl font-bold text-brand-charcoal text-center mb-6 uppercase"
           style={{ textShadow: '2px 4px 8px rgba(225, 138, 62, 0.4)' }}
         >
           {aboutUs.title}
         </h1>
+       </div>
 
         {/* Centered Description */}
         <p
