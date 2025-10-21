@@ -30,8 +30,6 @@ export function ShopSection({ shopItems, itemsPerPage = 4 }: ShopSectionProps) {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
-    // Scroll to top of shop section
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
