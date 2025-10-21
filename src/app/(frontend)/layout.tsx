@@ -13,7 +13,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen flex flex-col justify-between bg-background text-foreground">
         <Header />
         <main>{children}</main>
         <Footer />
