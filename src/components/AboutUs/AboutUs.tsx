@@ -10,7 +10,7 @@ export async function AboutUs() {
   })
 
   return (
-    <section className="w-full py-16">
+    <section className="w-full py-16 px-2">
       <div className="container mx-auto">
         {/* Centered Title */}
        <div>

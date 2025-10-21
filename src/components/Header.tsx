@@ -19,17 +19,17 @@ export async function Header() {
 
   return (
     <header
-      className="w-full py-8 flex justify-center items-center"
+      className="w-full py-2 md:py-8 flex justify-center items-center relative px-2 md:px-8"
       style={{
         backgroundImage: 'url(/camo.svg)',
         backgroundRepeat: 'repeat',
         backgroundPosition: 'left top',
       }}
     >
-      <div className="flex-1 flex justify-start items-center gap-6 pl-8">
-        <NavLinks />
+      <div className="flex justify-start items-center gap-6 flex-1">
+        <NavLinks phoneNumber={settings.phoneNumber} showroomLink={settings.showroomLink} />
       </div>
-      <Link href="/" className="block w-20 h-20">
+      <Link href="/" className="block w-14 md:w-20 h-14 md:h-20">
         <Image
           src={logoUrl}
           alt="Airsoft Logo"
@@ -39,11 +39,11 @@ export async function Header() {
           height={80}
         />
       </Link>
-      <div className="flex-1 flex justify-end items-center gap-6 pr-8">
+      <div className="flex-1 max-sm:hidden flex justify-end items-center gap-6 pr-8">
         {settings.phoneNumber && (
           <a
             href={`tel:${settings.phoneNumber}`}
-            className="flex flex-col items-center gap-2 text-white hover:text-gray-200 transition-colors"
+            className="hidden md:flex flex-col items-center gap-2 text-white hover:text-gray-200 transition-colors"
           >
             <Phone size={28} />
             <span className="font-normal text-xs">{settings.phoneNumber}</span>
@@ -54,7 +54,7 @@ export async function Header() {
             href={settings.showroomLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-2 text-white hover:text-gray-200 transition-colors"
+            className="hidden md:flex flex-col items-center gap-2 text-white hover:text-gray-200 transition-colors"
           >
             <MapPin size={28} />
             <span className="font-normal text-xs">Showroom</span>
