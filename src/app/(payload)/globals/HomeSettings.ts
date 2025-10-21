@@ -95,5 +95,15 @@ export const HomeSettings: GlobalConfig = {
         description: 'Select events to feature on the home page',
       },
     },
+    {
+      name: 'featuredShop',
+      type: 'relationship',
+      relationTo: 'shop',
+      hasMany: true,
+      label: 'Featured Shop Items',
+      admin: {
+        description: 'Select shop items to feature on the home page',
+      },
+    },
   ],
 }

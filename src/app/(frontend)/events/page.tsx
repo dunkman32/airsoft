@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { EventsGrid } from '@/components/EventsGrid/EventsGrid'
-import type { Events } from '@/app/(payload)/payload-types'
+import type { Event } from '@/app/(payload)/payload-types'
 
 interface PageProps {
   searchParams: Promise<{
@@ -28,7 +28,7 @@ export default async function EventsListPage({ searchParams }: PageProps) {
     sort: '-date',
   })
 
-  const eventsItems = result.docs as Events[]
+  const eventsItems = result.docs as Event[]
   const totalPages = result.totalPages
   const hasNextPage = result.hasNextPage
   const hasPrevPage = result.hasPrevPage

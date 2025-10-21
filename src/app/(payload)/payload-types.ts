@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     news: News;
     events: Event;
+    shop: Shop;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    shop: ShopSelect<false> | ShopSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -239,6 +241,45 @@ export interface Event {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shop".
+ */
+export interface Shop {
+  id: number;
+  image: number | Media;
+  title: string;
+  desc: string;
+  /**
+   * URL-friendly version of the title (auto-generated if left empty)
+   */
+  slug: string;
+  price: number;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  extraImages?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -259,6 +300,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'shop';
+        value: number | Shop;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -377,6 +422,27 @@ export interface EventsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shop_select".
+ */
+export interface ShopSelect<T extends boolean = true> {
+  image?: T;
+  title?: T;
+  desc?: T;
+  slug?: T;
+  price?: T;
+  content?: T;
+  extraImages?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -439,6 +505,10 @@ export interface HomeSetting {
    * Select events to feature on the home page
    */
   featuredEvents?: (number | Event)[] | null;
+  /**
+   * Select shop items to feature on the home page
+   */
+  featuredShop?: (number | Shop)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -512,6 +582,7 @@ export interface HomeSettingsSelect<T extends boolean = true> {
       };
   featuredNews?: T;
   featuredEvents?: T;
+  featuredShop?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

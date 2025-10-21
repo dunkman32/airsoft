@@ -12,6 +12,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { Events } from './collections/Events'
+import { Shop } from './collections/Shop'
 import { HomeSettings } from './globals/HomeSettings'
 import { AboutUs } from './globals/AboutUs'
 import { Rules } from './globals/Rules'
@@ -34,7 +35,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, News, Events],
+  collections: [Users, Media, News, Events, Shop],
   globals: [HomeSettings, AboutUs, Rules],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET,

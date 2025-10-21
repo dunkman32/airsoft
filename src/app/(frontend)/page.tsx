@@ -5,6 +5,7 @@ import { AdsCarousel } from '@/components/AdsCarousel'
 import { HomeCarousel } from '@/components/HomeCarousel'
 import { NewsCarousel } from '@/components/NewsCarousel'
 import { EventsCarousel } from '@/components/EventsCarousel'
+import { ShopSection } from '@/components/ShopSection'
 
 export default async function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default async function HomePage() {
       <HomeCarousel />
       <AboutUs />
       <NewsCarousel />
+      <ShopSection />
       <EventsCarousel />
       <div className="content">
         <picture>
