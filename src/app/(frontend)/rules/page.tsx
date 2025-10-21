@@ -14,11 +14,17 @@ export default async function RulesPage() {
     slug: 'rules',
   })
 
-  const formattedDate = new Date(rules.updatedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  const formattedDate = rules.updatedAt
+    ? new Date(rules.updatedAt).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
 
   return (
     <article className="w-full">
