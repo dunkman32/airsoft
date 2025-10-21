@@ -4,9 +4,7 @@ import type { AboutUs, Media } from '@/app/(payload)/payload-types'
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  CarouselItem
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
