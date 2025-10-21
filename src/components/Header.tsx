@@ -5,6 +5,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Media } from '@/app/(payload)/payload-types'
 import Link from 'next/link'
+import { NavLinks } from './NavLinks'
 
 export async function Header() {
   const payload = await getPayload({ config })
@@ -25,7 +26,9 @@ export async function Header() {
         backgroundPosition: 'left top',
       }}
     >
-      <div className="flex-1" />
+      <div className="flex-1 flex justify-start items-center gap-6 pl-8">
+        <NavLinks />
+      </div>
       <Link href="/" className="block w-20 h-20">
         <Image
           src={logoUrl}

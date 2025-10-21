@@ -4,6 +4,7 @@ import { AboutUs } from '@/components/AboutUs/index'
 import { AdsCarousel } from '@/components/AdsCarousel'
 import { HomeCarousel } from '@/components/HomeCarousel'
 import { NewsCarousel } from '@/components/NewsCarousel'
+import { EventsCarousel } from '@/components/EventsCarousel'
 
 export default async function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default async function HomePage() {
       <HomeCarousel />
       <AboutUs />
       <NewsCarousel />
+      <EventsCarousel />
       <div className="content">
         <picture>
           <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />

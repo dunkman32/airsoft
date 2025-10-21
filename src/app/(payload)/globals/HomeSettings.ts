@@ -85,5 +85,15 @@ export const HomeSettings: GlobalConfig = {
         description: 'Select news articles to feature on the home page',
       },
     },
+    {
+      name: 'featuredEvents',
+      type: 'relationship',
+      relationTo: 'events',
+      hasMany: true,
+      label: 'Featured Events',
+      admin: {
+        description: 'Select events to feature on the home page',
+      },
+    },
   ],
 }

@@ -1,2 +1,2 @@
 export { NewsInner } from './NewsInner'
-export { RichText } from './RichText'
+export { RichText } from '../RichText'

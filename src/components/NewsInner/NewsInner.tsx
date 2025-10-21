@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import type { News, Media } from '@/app/(payload)/payload-types'
-import { RichText } from './RichText'
+import { RichText } from '../RichText'
 
 interface NewsInnerProps {
   newsItem: News

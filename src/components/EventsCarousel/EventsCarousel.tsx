@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { News, Media } from '@/app/(payload)/payload-types'
+import type { Event, Media } from '@/app/(payload)/payload-types'
 
 import {
   Carousel,
@@ -15,15 +15,15 @@ import {
 import Autoplay from 'embla-carousel-autoplay'
 import { SectionTitle } from '@/components/SectionTitle'
 
-export function NewsCarouselComponent({ newsItems }: { newsItems?: News[] }) {
-  if (!newsItems || newsItems.length === 0) {
+export function EventsCarouselComponent({ eventsItems }: { eventsItems?: Event[] }) {
+  if (!eventsItems || eventsItems.length === 0) {
     return null
   }
 
   return (
     <div className="container mx-auto p-3 lg:p-8 rounded-lg">
-      <Link href="/news">
-        <SectionTitle showIcons>Featured News</SectionTitle>
+      <Link href="/events">
+        <SectionTitle showIcons>Featured Events</SectionTitle>
       </Link>
       <Carousel
         opts={{
@@ -35,28 +35,32 @@ export function NewsCarouselComponent({ newsItems }: { newsItems?: News[] }) {
         className="w-full"
       >
         <CarouselContent className="-ml-2 md:-ml-4">
-          {newsItems.map((item, index) => {
-            const image = item.image as Media | undefined
+          {eventsItems.map((item, index) => {
+            const image = item.coverImage as Media | undefined
             const imageUrl = image?.url
 
             if (!imageUrl) return null
 
-            const newsCard = (
+            const formattedDate = new Date(item.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })
+
+            const eventCard = (
               <div className="relative w-full min-h-[300px] overflow-hidden rounded-lg bg-card border border-border hover:shadow-lg transition-shadow">
                 <div className="relative w-full h-[200px]">
                   <Image
                     src={imageUrl}
-                    alt={item.title || image.alt || `News ${index + 1}`}
+                    alt={item.title || image.alt || `Event ${index + 1}`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
                 <div className="p-4">
+                  <time className="text-xs text-gray-400 block mb-2">{formattedDate}</time>
                   <h3 className="text-lg font-semibold mb-2 line-clamp-2">{item.title}</h3>
-                  {item.desc && (
-                    <p className="text-sm text-muted-foreground line-clamp-3">{item.desc}</p>
-                  )}
                 </div>
               </div>
             )
@@ -66,8 +70,8 @@ export function NewsCarouselComponent({ newsItems }: { newsItems?: News[] }) {
                 key={item.id || index}
                 className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
               >
-                <Link href={`/news/${item.slug}`} className="block w-full">
-                  {newsCard}
+                <Link href={`/events/${item.slug}`} className="block w-full">
+                  {eventCard}
                 </Link>
               </CarouselItem>
             )

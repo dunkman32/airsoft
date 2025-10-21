@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @plugin "tailwindcss-animate";
 
@@ -144,6 +144,35 @@
   }
 }
 
+a {
+  @apply transition-all duration-300;
+}
+a:hover {
+  @apply text-brand-orange;
+  text-shadow: 0 2px 8px rgba(225, 138, 62, 0.3);
+}
+
+/* Navigation Links */
+.nav-link {
+  @apply flex flex-col items-center gap-2 text-white transition-all duration-300;
+}
+
+.nav-link:hover {
+  @apply text-gray-200;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.active {
+  @apply text-brand-orange;
+  text-shadow: 0 2px 8px rgba(225, 138, 62, 0.4);
+  font-weight: 600;
+}
+
+.nav-link.active:hover {
+  @apply text-brand-orange;
+  text-shadow: 0 2px 10px rgba(225, 138, 62, 0.6);
+}
+
 .container {
-    max-width: 1440px;
+  max-width: 1440px;
 }
