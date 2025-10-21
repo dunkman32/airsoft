@@ -56,7 +56,7 @@ export function ShopInner({ shopItem }: ShopInnerProps) {
             src={mainImage.url}
             alt={mainImage.alt || shopItem.title}
             fill
-            className="object-cover"
+            className="object-contain"
             priority
           />
         )}
