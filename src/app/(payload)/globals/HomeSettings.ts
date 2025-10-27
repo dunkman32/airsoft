@@ -5,6 +5,20 @@ export const HomeSettings: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async ({ req }) => {
+        // Revalidate the home page when content changes
+        if (req.context.triggerRevalidate !== false) {
+          try {
+            await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/revalidate?secret=${process.env.REVALIDATION_SECRET}&collection=home-settings`)
+          } catch (error) {
+            console.error('Error revalidating home settings:', error)
+          }
+        }
+      },
+    ],
+  },
   fields: [
     {
       name: 'logo',

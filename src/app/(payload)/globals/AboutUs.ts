@@ -5,6 +5,20 @@ export const AboutUs: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async ({ req }) => {
+        // Revalidate the about us page when content changes
+        if (req.context.triggerRevalidate !== false) {
+          try {
+            await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/revalidate?secret=${process.env.REVALIDATION_SECRET}&collection=about-us`)
+          } catch (error) {
+            console.error('Error revalidating about us:', error)
+          }
+        }
+      },
+    ],
+  },
   fields: [
     {
       name: 'title',
