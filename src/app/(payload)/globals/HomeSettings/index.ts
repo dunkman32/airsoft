@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateHomeSettings } from './actions'
 
 export const HomeSettings: GlobalConfig = {
   slug: 'home-settings',
@@ -7,15 +8,8 @@ export const HomeSettings: GlobalConfig = {
   },
   hooks: {
     afterChange: [
-      async ({ req }) => {
-        // Revalidate the home page when content changes
-        if (req.context.triggerRevalidate !== false) {
-          try {
-            await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/revalidate?secret=${process.env.REVALIDATION_SECRET}&collection=home-settings`)
-          } catch (error) {
-            console.error('Error revalidating home settings:', error)
-          }
-        }
+      async () => {
+        await revalidateHomeSettings()
       },
     ],
   },

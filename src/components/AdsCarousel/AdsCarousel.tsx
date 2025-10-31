@@ -6,7 +6,7 @@ import {
   CarouselContent,
   CarouselItem
 } from '@/components/ui/carousel'
-import Autoplay from 'embla-carousel-autoplay'
+import AutoScroll from 'embla-carousel-auto-scroll'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -24,7 +24,7 @@ export function AdsCarouselComponent({ adsItems }: { adsItems?: HomeSetting['ads
           loop: true,
           slidesToScroll: 1,
         }}
-        plugins={[Autoplay({ delay: 2000 })]}
+        plugins={[AutoScroll()]}
         className="w-full"
       >
         <CarouselContent className="-ml-1 md:-ml-2">

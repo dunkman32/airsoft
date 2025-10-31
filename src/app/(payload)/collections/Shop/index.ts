@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateShop } from './actions'
 
 // Helper function to generate slug from title
 const formatSlug = (value: string): string => {
@@ -10,14 +11,14 @@ const formatSlug = (value: string): string => {
     .trim()
 }
 
-export const News: CollectionConfig = {
-  slug: 'news',
+export const Shop: CollectionConfig = {
+  slug: 'shop',
   access: {
     read: () => true,
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['image', 'title', 'slug', 'createdAt'],
+    defaultColumns: ['image', 'title', 'price', 'createdAt'],
   },
   hooks: {
     beforeValidate: [
@@ -31,7 +32,7 @@ export const News: CollectionConfig = {
           // Check for uniqueness and append number if slug exists
           while (true) {
             const existing = await req.payload.find({
-              collection: 'news',
+              collection: 'shop',
               where: {
                 slug: {
                   equals: slug,
@@ -59,6 +60,11 @@ export const News: CollectionConfig = {
         return data
       },
     ],
+    afterChange: [
+      async () => {
+        await revalidateShop()
+      },
+    ],
   },
   fields: [
     {
@@ -66,7 +72,7 @@ export const News: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       required: true,
-      label: 'Image',
+      label: 'Main Image',
     },
     {
       name: 'title',
@@ -83,8 +89,8 @@ export const News: CollectionConfig = {
     {
       name: 'slug',
       type: 'text',
-      required: true,
       unique: true,
+      required: true,
       label: 'Slug',
       admin: {
         description: 'URL-friendly version of the title (auto-generated if left empty)',
@@ -103,10 +109,41 @@ export const News: CollectionConfig = {
       },
     },
     {
+      name: 'price',
+      type: 'number',
+      required: true,
+      min: 0,
+      label: 'Price',
+      admin: {
+        step: 0.01,
+      },
+    },
+    {
       name: 'content',
       type: 'richText',
       required: true,
       label: 'Content',
+    },
+    {
+      name: 'extraImages',
+      type: 'array',
+      label: 'Extra Images',
+      minRows: 0,
+      maxRows: 10,
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+          label: 'Image',
+        },
+        {
+          name: 'caption',
+          type: 'text',
+          label: 'Caption',
+        },
+      ],
     },
   ],
 }

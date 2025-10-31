@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateEvents } from './actions'
 
 // Helper function to generate slug from title
 const formatSlug = (value: string): string => {
@@ -57,6 +58,11 @@ export const Events: CollectionConfig = {
         }
 
         return data
+      },
+    ],
+    afterChange: [
+      async () => {
+        await revalidateEvents()
       },
     ],
   },
