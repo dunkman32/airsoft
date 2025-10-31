@@ -13,9 +13,11 @@ import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { Events } from './collections/Events'
 import { Shop } from './collections/Shop'
+import { Teams } from './collections/Teams'
 import { HomeSettings } from './globals/HomeSettings'
 import { AboutUs } from './globals/AboutUs'
 import { Rules } from './globals/Rules'
+import { TeamsGlobal } from './globals/TeamsGlobal'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,8 +37,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, News, Events, Shop],
-  globals: [HomeSettings, AboutUs, Rules],
+  collections: [Users, Media, News, Events, Shop, Teams],
+  globals: [HomeSettings, AboutUs, Rules, TeamsGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET,
   typescript: {

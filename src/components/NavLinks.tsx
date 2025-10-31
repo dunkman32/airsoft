@@ -17,6 +17,7 @@ export function NavLinks({ phoneNumber, showroomLink }: NavLinksProps) {
   const links = [
     { href: '/news', label: 'News' },
     { href: '/events', label: 'Events' },
+    { href: '/teams', label: 'Teams' },
     { href: '/rules', label: 'Rules' },
     { href: '/shop', label: 'Shop' },
   ]

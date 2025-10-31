@@ -72,6 +72,7 @@ export interface Config {
     news: News;
     events: Event;
     shop: Shop;
+    teams: Team;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,6 +84,7 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     shop: ShopSelect<false> | ShopSelect<true>;
+    teams: TeamsSelect<false> | TeamsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -94,11 +96,13 @@ export interface Config {
     'home-settings': HomeSetting;
     'about-us': AboutUs;
     rules: Rule;
+    'teams-global': TeamsGlobal;
   };
   globalsSelect: {
     'home-settings': HomeSettingsSelect<false> | HomeSettingsSelect<true>;
     'about-us': AboutUsSelect<false> | AboutUsSelect<true>;
     rules: RulesSelect<false> | RulesSelect<true>;
+    'teams-global': TeamsGlobalSelect<false> | TeamsGlobalSelect<true>;
   };
   locale: null;
   user: User & {
@@ -280,6 +284,36 @@ export interface Shop {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams".
+ */
+export interface Team {
+  id: number;
+  /**
+   * Team name
+   */
+  name: string;
+  /**
+   * Team description
+   */
+  desc: string;
+  /**
+   * Team hero image
+   */
+  hero: number | Media;
+  /**
+   * Team image gallery
+   */
+  gallery?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -304,6 +338,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'shop';
         value: number | Shop;
+      } | null)
+    | ({
+        relationTo: 'teams';
+        value: number | Team;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -443,6 +481,23 @@ export interface ShopSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams_select".
+ */
+export interface TeamsSelect<T extends boolean = true> {
+  name?: T;
+  desc?: T;
+  hero?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -559,6 +614,41 @@ export interface Rule {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams-global".
+ */
+export interface TeamsGlobal {
+  id: number;
+  /**
+   * Teams page title
+   */
+  title: string;
+  /**
+   * Teams page content (rich text)
+   */
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Team hero image
+   */
+  teamHero: number | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-settings_select".
  */
 export interface HomeSettingsSelect<T extends boolean = true> {
@@ -614,6 +704,18 @@ export interface AboutUsSelect<T extends boolean = true> {
 export interface RulesSelect<T extends boolean = true> {
   title?: T;
   content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams-global_select".
+ */
+export interface TeamsGlobalSelect<T extends boolean = true> {
+  title?: T;
+  content?: T;
+  teamHero?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
